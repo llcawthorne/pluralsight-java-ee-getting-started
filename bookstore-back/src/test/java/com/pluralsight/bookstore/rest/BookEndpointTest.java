@@ -8,7 +8,6 @@ import com.pluralsight.bookstore.util.NumberGenerator;
 import com.pluralsight.bookstore.util.TextUtil;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.extension.rest.client.ArquillianResteasyResource;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -34,6 +33,8 @@ public class BookEndpointTest {
     @Test
     // Test doesn't work.  Currently giving "java.lang.IllegalStateException: No baseURL found in HTTPContext
     public void createBook() throws Exception {
+        // REMEMBER: the database starts out empty in my Arquillian tests
+
         // Test counting books
         WebTarget webTarget = ClientBuilder.newClient().target("http://localhost:8080/bookstore-back/api/books/");
         Response response = webTarget.path("count").request().get();
@@ -45,10 +46,26 @@ public class BookEndpointTest {
         assertEquals(NO_CONTENT.getStatusCode(), response.getStatus());
 
         // Creates a book
-        Book book = new Book("a  title", "description", 12F, "isbn", new Date(), 123, "http://blahblah", Language.ENGLISH);
+        Book book = new Book("a title", "description", 12F, "isbn", new Date(), 123, "http://blahblah", Language.ENGLISH);
         webTarget = ClientBuilder.newClient().target("http://localhost:8080/bookstore-back/api/books/");
         response = webTarget.request(APPLICATION_JSON).post(Entity.entity(book, APPLICATION_JSON));
         assertEquals(CREATED.getStatusCode(), response.getStatus());
+
+        // Test counting books
+        webTarget = ClientBuilder.newClient().target("http://localhost:8080/bookstore-back/api/books/");
+        response = webTarget.path("count").request().get();
+        String json = response.readEntity(String.class);
+        json.equals("1");
+
+        webTarget = ClientBuilder.newClient().target("http://localhost:8080/bookstore-back/api/books/");
+        response = webTarget.path("1").request().get();
+        // I can't compare book to book, because date and isbn are different
+        // Title was different, until I provided a sanitized title for my starting book
+        // So let's compare title, description, and image url
+        Book returnedBook = response.readEntity(Book.class);
+        assertEquals(book.getTitle(), returnedBook.getTitle());
+        assertEquals(book.getDescription(), returnedBook.getDescription());
+        assertEquals(book.getImageUrl(), returnedBook.getImageUrl());
     }
 
     @Deployment(testable = false)

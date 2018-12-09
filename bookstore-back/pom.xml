@@ -73,23 +73,44 @@
       <version>${version.arquillian.wildfly}</version>
       <scope>test</scope>
     </dependency>
-      <dependency>
-          <groupId>org.jboss.arquillian.extension</groupId>
-          <artifactId>arquillian-rest-client-api</artifactId>
-          <version>1.0.0.Alpha4</version>
-          <scope>test</scope>
-      </dependency>
-      <dependency>
-          <groupId>org.jboss.arquillian.extension</groupId>
-          <artifactId>arquillian-rest-client-impl-3x</artifactId>
-          <version>1.0.0.Alpha4</version>
-          <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.jboss.resteasy</groupId>
-        <artifactId>resteasy-jackson-provider</artifactId>
-        <version>3.6.2.Final</version>
-        <scope>test</scope>
-     </dependency>
+    <dependency>
+      <groupId>org.jboss.arquillian.extension</groupId>
+      <artifactId>arquillian-rest-client-api</artifactId>
+      <version>1.0.0.Alpha4</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.arquillian.extension</groupId>
+      <artifactId>arquillian-rest-client-impl-3x</artifactId>
+      <version>1.0.0.Alpha4</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-jackson-provider</artifactId>
+      <version>3.6.2.Final</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- Need JAXB to serialize Entity.  Not included in JDK 11 -->
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>2.2.11</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-core</artifactId>
+      <version>2.2.11</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>2.2.11</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>activation</artifactId>
+      <version>1.1.1</version>
+    </dependency>
   </dependencies>
 </project>

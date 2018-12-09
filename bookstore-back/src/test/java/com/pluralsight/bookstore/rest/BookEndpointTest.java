@@ -16,6 +16,7 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
@@ -23,8 +24,7 @@ import javax.ws.rs.core.Response;
 import java.util.Date;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static javax.ws.rs.core.Response.Status.CREATED;
-import static javax.ws.rs.core.Response.Status.NO_CONTENT;
+import static javax.ws.rs.core.Response.Status.*;
 import static junit.framework.TestCase.assertEquals;
 
 @RunWith(Arquillian.class)
@@ -32,17 +32,21 @@ import static junit.framework.TestCase.assertEquals;
 public class BookEndpointTest {
 
     @Test
-    public void createBook(@ArquillianResteasyResource("api/books") WebTarget webTarget) throws Exception {
+    // Test doesn't work.  Currently giving "java.lang.IllegalStateException: No baseURL found in HTTPContext
+    public void createBook() throws Exception {
         // Test counting books
+        WebTarget webTarget = ClientBuilder.newClient().target("http://localhost:8080/bookstore-back/api/books/");
         Response response = webTarget.path("count").request().get();
         assertEquals(NO_CONTENT.getStatusCode(), response.getStatus());
 
         // Test find all
+        webTarget = ClientBuilder.newClient().target("http://localhost:8080/bookstore-back/api/books/");
         response = webTarget.request(APPLICATION_JSON).get();
         assertEquals(NO_CONTENT.getStatusCode(), response.getStatus());
 
         // Creates a book
         Book book = new Book("a  title", "description", 12F, "isbn", new Date(), 123, "http://blahblah", Language.ENGLISH);
+        webTarget = ClientBuilder.newClient().target("http://localhost:8080/bookstore-back/api/books/");
         response = webTarget.request(APPLICATION_JSON).post(Entity.entity(book, APPLICATION_JSON));
         assertEquals(CREATED.getStatusCode(), response.getStatus());
     }

@@ -73,5 +73,23 @@
       <version>${version.arquillian.wildfly}</version>
       <scope>test</scope>
     </dependency>
+      <dependency>
+          <groupId>org.jboss.arquillian.extension</groupId>
+          <artifactId>arquillian-rest-client-api</artifactId>
+          <version>1.0.0.Alpha4</version>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.jboss.arquillian.extension</groupId>
+          <artifactId>arquillian-rest-client-impl-3x</artifactId>
+          <version>1.0.0.Alpha4</version>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-jackson-provider</artifactId>
+        <version>3.6.2.Final</version>
+        <scope>test</scope>
+     </dependency>
   </dependencies>
 </project>

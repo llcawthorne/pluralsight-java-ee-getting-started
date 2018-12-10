@@ -1,5 +1,8 @@
 package com.pluralsight.bookstore.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -8,39 +11,49 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
+@ApiModel("Book resource representation")
 public class Book {
 
     @Id
     @GeneratedValue
+    @ApiModelProperty("Identifier")
     private Long id;
 
     @Column(length = 200)
     @NotNull @Size(min = 1, max = 200)
+    @ApiModelProperty("Title of the book")
     private String title;
 
     @Column(length = 10000)
     @Size(min = 1, max = 10000)
+    @ApiModelProperty("Description of the book")
     private String description;
 
     @Column(name = "unit_cost")
     @NotNull @Min(1)
+    @ApiModelProperty("Unit cost of the book")
     private Float unitCost;
 
     @Column(length = 50)
     @NotNull @Size(min = 1, max = 50)
+    @ApiModelProperty("ISBN of the book")
     private String isbn;
 
     @Column(name = "publication_date")
     @Temporal(TemporalType.DATE)
     @Past
+    @ApiModelProperty("Publication date of the book")
     private Date publicationDate;
 
     @Column(name = "nb_of_pages")
+    @ApiModelProperty("Number of pages of the book")
     private Integer nbOfPages;
 
     @Column(name = "image_url")
+    @ApiModelProperty("URI of image of cover of the book")
     private String imageUrl;
 
+    @ApiModelProperty("Language book is written in")
     private Language language;
 
     public Book() {

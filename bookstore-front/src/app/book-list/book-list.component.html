@@ -4,7 +4,7 @@
   <li class="media my-4" *ngFor="let book of books">
     <img class="d-flex mr-3 img-thumbnail" src = "{{book.imageURL}}"/>
     <div>
-      <h5 class="mt-0 mb-1"><a href="">{{book.title}}</a></h5>
+      <h5 class="mt-0 mb-1"><a [routerLink]="['/book-detail/', book.id]">{{book.title}}</a></h5>
       {{book.description}}
     </div>
   </li>

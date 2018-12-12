@@ -1,6 +1,6 @@
 <h2>Detail of a book</h2>
 
-<div>
+<form (ngSubmit)="delete()">
   <div class="form-group row">
     <label class="col-2 col-form-label">Title</label>
     <div class="col-10">
@@ -40,5 +40,5 @@
   </div>
 
   <button type="submit" class="btn btn-primary">Delete</button>&nbsp;
-  <a class="btn btn-secondary" href="" role="button">Back</a>
-</div>
+  <a class="btn btn-secondary" [routerLink]="['/book-list']" role="button">Back</a>
+</form>

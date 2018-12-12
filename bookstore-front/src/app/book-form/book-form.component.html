@@ -1,6 +1,6 @@
 <h2>Creates a new Book</h2>
 
-<div>
+<form (ngSubmit)="create()">
   <div class="form-group row">
     <label class="col-2 col-form-label">Title</label>
     <div class="col-10">
@@ -51,4 +51,4 @@
 
   <button type="submit" class="btn btn-primary">Create</button>&nbsp;
   <a class="btn btn-secondary" [routerLink]="['/book-list']" role="button">Cancel</a>
-</div>
+</form>

@@ -16,3 +16,11 @@ it does with the mock data.  It doesn't actually make any rest calls, since
 there is no service.  I might go back later and try adding a service by
 hand.  (Angular Tutorial)[https://angular.io/tutorial] shows you how to 
 make calls by hand with the HttpClient.
+
+I should probably make one pluralsight repo to contain all my coursework
+from PluralSight courses.  But my trial is only a month, and in general,
+I found the courses to be overly dated.  The EE stuff didn't really
+cover anything I didn't understand fairly well either.  I ended up
+watching a lot more LinkedIn Learning courses, which were more up
+to date and had a good variety on Spring topics.  So this will
+probably be my only PluralSight course repo.
